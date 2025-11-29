@@ -30,3 +30,4 @@ bower_components
 # bower Dependency directory
 test/assets/bower_components
 .idea
+.env
