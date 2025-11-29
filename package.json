@@ -4,7 +4,6 @@
   "description": "This Buildfire plugin allows user to create and manage events manually",
   "main": "index.js",
   "scripts": {
-    "postinstall": "./node_modules/.bin/bower install",
     "test": "./node_modules/.bin/karma start --single-run --browsers PhantomJS",
     "build": "cd .. && rm -rf eventsManualPlugin.zip && zip -r eventsManualPlugin.zip eventsManualPlugin/ -x \\*node_modules\\* \\*.git\\* \\*test\\*"
   },
@@ -24,8 +23,6 @@
     "karma-jasmine": "^0.3.6",
     "karma-junit-reporter": "^0.3.3",
     "karma-mocha": "^0.2.0",
-    "karma-phantomjs-launcher": "^0.2.1",
-    "mocha": "^2.2.5",
-    "phantomjs": "^1.9.17"
+    "mocha": "^2.2.5"
   }
 }

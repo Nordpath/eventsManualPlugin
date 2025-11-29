@@ -387,3 +387,90 @@
 	opacity: 0 !important;
 	pointer-events: none !important;
 }
+
+.bottom-logo-container {
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	width: 100%;
+	background: #fff;
+	border-top: 1px solid #e0e0e0;
+	z-index: 1000;
+	box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.bottom-logo-wrapper {
+	padding: 15px;
+	text-align: center;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+
+.bottom-logo-collaboration-text {
+	font-size: 12px;
+	color: #666;
+	margin-bottom: 8px;
+	font-weight: 400;
+	letter-spacing: 0.5px;
+}
+
+.bottom-logo-image-wrapper {
+	cursor: pointer;
+	transition: opacity 0.3s ease;
+}
+
+.bottom-logo-image-wrapper:hover {
+	opacity: 0.8;
+}
+
+.bottom-logo-image-wrapper.logo-small img {
+	height: 35px;
+	width: auto;
+	max-width: 200px;
+}
+
+.bottom-logo-image-wrapper.logo-medium img {
+	height: 50px;
+	width: auto;
+	max-width: 250px;
+}
+
+.bottom-logo-image-wrapper.logo-large img {
+	height: 70px;
+	width: auto;
+	max-width: 300px;
+}
+
+.bottom-banner-container {
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	width: 100%;
+	z-index: 1000;
+	cursor: pointer;
+	transition: opacity 0.3s ease;
+}
+
+.bottom-banner-container:hover {
+	opacity: 0.9;
+}
+
+.bottom-banner-image {
+	width: 100%;
+	height: auto;
+	display: block;
+	max-height: 150px;
+	object-fit: cover;
+}
+
+.events-plugin .event-list.with-bottom-logo {
+	padding-bottom: 100px;
+}
+
+.events-plugin .event-list.with-bottom-banner {
+	padding-bottom: 120px;
+}

@@ -394,6 +394,18 @@
                     if (!WidgetHome.data.design.itemDetailsLayout) {
                       WidgetHome.data.design.itemDetailsLayout = LAYOUTS.itemDetailsLayout[0].name;
                     }
+                    if (!WidgetHome.data.design.bottomLogo) {
+                      WidgetHome.data.design.bottomLogo = {
+                        displayMode: "logo",
+                        logoImage: "",
+                        logoUrl: "",
+                        logoSize: "small",
+                        showCollaborationText: false,
+                        bannerImage: "",
+                        bannerUrl: "",
+                        enableBannerDisplay: true
+                      };
+                    }
                     currentLayout = WidgetHome.data.design.itemDetailsLayout;
                     if (
                       buildfire &&
@@ -554,6 +566,43 @@
             WidgetHome.openDetailsPage = function (event) {
                 EventCache.setCache(event);
                 Location.goTo('#/event/' + event.id);
+            };
+
+            WidgetHome.showBottomLogo = function () {
+                return WidgetHome.data &&
+                       WidgetHome.data.design &&
+                       WidgetHome.data.design.bottomLogo &&
+                       WidgetHome.data.design.bottomLogo.displayMode === 'logo' &&
+                       WidgetHome.data.design.bottomLogo.logoImage;
+            };
+
+            WidgetHome.showBottomBanner = function () {
+                return WidgetHome.data &&
+                       WidgetHome.data.design &&
+                       WidgetHome.data.design.bottomLogo &&
+                       WidgetHome.data.design.bottomLogo.displayMode === 'banner' &&
+                       WidgetHome.data.design.bottomLogo.bannerImage &&
+                       WidgetHome.data.design.bottomLogo.enableBannerDisplay;
+            };
+
+            WidgetHome.onBottomLogoClick = function () {
+                if (WidgetHome.data.design.bottomLogo.logoUrl) {
+                    var url = WidgetHome.data.design.bottomLogo.logoUrl;
+                    if (!/^https?:\/\//i.test(url)) {
+                        url = 'https://' + url;
+                    }
+                    buildfire.navigation.openWindow(url, '_blank');
+                }
+            };
+
+            WidgetHome.onBottomBannerClick = function () {
+                if (WidgetHome.data.design.bottomLogo.bannerUrl) {
+                    var url = WidgetHome.data.design.bottomLogo.bannerUrl;
+                    if (!/^https?:\/\//i.test(url)) {
+                        url = 'https://' + url;
+                    }
+                    buildfire.navigation.openWindow(url, '_blank');
+                }
             };
 
             $scope.getDayClass = function (date, mode) {

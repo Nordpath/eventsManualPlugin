@@ -64,7 +64,7 @@
                     <div style="text-align: center;margin-bottom: 3px;">
                         <button type="button" class="btn btn-success btn-sm" ng-click="WidgetHome.resetCalendar()">All Events</button>
                     </div>
-                    <div class="event-list">
+                    <div class="event-list" ng-class="{'with-bottom-logo': WidgetHome.showBottomLogo(), 'with-bottom-banner': WidgetHome.showBottomBanner()}">
                         <div ng-if="WidgetHome.events">
                             <div infinite-scroll="WidgetHome.loadMore()" infinite-scroll-distance="1" data-infinite-container=".infinite-scroll-parent" infinite-scroll-disabled="WidgetHome.busy">
                                 <div class="event-item clearfix"
@@ -116,6 +116,23 @@
     </div>
     <div>
         <div ng-view="" class="slide content" ng-hide="showFeed" data-back-img="{{backgroundImage}}"></div>
+    </div>
+
+    <div ng-controller="WidgetHomeCtrl as WidgetHome">
+        <div class="bottom-logo-container" ng-if="WidgetHome.showBottomLogo()">
+            <div class="bottom-logo-wrapper">
+                <div class="bottom-logo-collaboration-text" ng-if="WidgetHome.data.design.bottomLogo.showCollaborationText">
+                    In collaboration with
+                </div>
+                <div class="bottom-logo-image-wrapper" ng-class="'logo-' + WidgetHome.data.design.bottomLogo.logoSize" ng-click="WidgetHome.onBottomLogoClick()">
+                    <img ng-src="{{WidgetHome.data.design.bottomLogo.logoImage}}" alt="Logo">
+                </div>
+            </div>
+        </div>
+
+        <div class="bottom-banner-container" ng-if="WidgetHome.showBottomBanner()" ng-click="WidgetHome.onBottomBannerClick()">
+            <img class="bottom-banner-image" ng-src="{{WidgetHome.data.design.bottomLogo.bannerImage}}" alt="Banner">
+        </div>
     </div>
 </body>
 </html>

@@ -22,3 +22,83 @@
 </div>
 <hr>
 <div id="background"></div>
+<hr>
+<div class="item row clearfix">
+  <div class="labels col-md-3 padding-right-zero pull-left">
+    <span>Bottom Logo</span>
+  </div>
+  <div class="main col-md-9 pull-right">
+    <div class="margin-bottom-fifteen">
+      <p class="margin-bottom-five">Choose between a small logo or a full-width banner at the bottom of the widget.</p>
+    </div>
+
+    <div class="margin-bottom-fifteen">
+      <label class="margin-bottom-five">Display Mode</label>
+      <div class="radio radio-primary radio-inline margin-right-twenty">
+        <input type="radio" id="logoMode" name="displayMode" value="logo" ng-model="DesignHome.data.design.bottomLogo.displayMode" ng-change="DesignHome.onDisplayModeChange()">
+        <label for="logoMode">Logo Mode</label>
+      </div>
+      <div class="radio radio-primary radio-inline">
+        <input type="radio" id="bannerMode" name="displayMode" value="banner" ng-model="DesignHome.data.design.bottomLogo.displayMode" ng-change="DesignHome.onDisplayModeChange()">
+        <label for="bannerMode">Banner Mode</label>
+      </div>
+      <p class="margin-top-five text-info"><small><strong>Logo:</strong> Small logo with optional text. <strong>Banner:</strong> Full-width clickable banner.</small></p>
+    </div>
+
+    <div ng-if="DesignHome.data.design.bottomLogo.displayMode === 'logo'">
+      <div class="margin-bottom-fifteen">
+        <label class="margin-bottom-five">Logo Image</label>
+        <div id="logoImage"></div>
+      </div>
+
+      <div class="margin-bottom-fifteen">
+        <label for="logoUrl" class="margin-bottom-five">Link URL</label>
+        <input type="url" id="logoUrl" class="form-control" ng-model="DesignHome.data.design.bottomLogo.logoUrl" placeholder="https://example.com">
+        <p class="margin-top-five text-info"><small>This URL will open in a webview when the logo is clicked</small></p>
+      </div>
+
+      <div class="margin-bottom-fifteen">
+        <label for="logoSize" class="margin-bottom-five">Logo Size</label>
+        <select id="logoSize" class="form-control" ng-model="DesignHome.data.design.bottomLogo.logoSize">
+          <option value="small">Small (35px)</option>
+          <option value="medium">Medium (50px)</option>
+          <option value="large">Large (70px)</option>
+        </select>
+      </div>
+
+      <div class="margin-bottom-fifteen">
+        <div class="checkbox checkbox-primary">
+          <input type="checkbox" id="showCollaborationText" ng-model="DesignHome.data.design.bottomLogo.showCollaborationText">
+          <label for="showCollaborationText">Show "In collaboration with" text</label>
+        </div>
+      </div>
+    </div>
+
+    <div ng-if="DesignHome.data.design.bottomLogo.displayMode === 'banner'">
+      <div class="margin-bottom-fifteen">
+        <label class="margin-bottom-five">Banner Image</label>
+        <div id="bannerImage"></div>
+        <p class="margin-top-five text-info"><small>Recommended: Wide banner images (e.g., 1200x200px or similar aspect ratio)</small></p>
+      </div>
+
+      <div class="margin-bottom-fifteen">
+        <label for="bannerUrl" class="margin-bottom-five">Link URL</label>
+        <input type="url" id="bannerUrl" class="form-control" ng-model="DesignHome.data.design.bottomLogo.bannerUrl" placeholder="https://www.example.com">
+        <p class="margin-top-five text-info"><small>This URL will open when the banner is clicked</small></p>
+      </div>
+
+      <div class="margin-bottom-fifteen">
+        <div class="checkbox checkbox-primary">
+          <input type="checkbox" id="enableBannerDisplay" ng-model="DesignHome.data.design.bottomLogo.enableBannerDisplay">
+          <label for="enableBannerDisplay">Enable Banner Display</label>
+        </div>
+        <p class="margin-top-five text-info"><small>Toggle banner visibility in the widget</small></p>
+      </div>
+    </div>
+
+    <div class="margin-top-twenty">
+      <button class="btn btn-primary" ng-click="DesignHome.saveBottomLogoConfig()">Save Configuration</button>
+      <button class="btn btn-danger margin-left-ten" ng-click="DesignHome.removeBottomLogoConfig()">Remove</button>
+    </div>
+  </div>
+</div>

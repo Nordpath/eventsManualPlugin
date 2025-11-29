@@ -10,7 +10,17 @@
         var _data = {
           design: {
             itemDetailsLayout: "",
-            itemDetailsBgImage: ""
+            itemDetailsBgImage: "",
+            bottomLogo: {
+              displayMode: "logo",
+              logoImage: "",
+              logoUrl: "",
+              logoSize: "small",
+              showCollaborationText: false,
+              bannerImage: "",
+              bannerUrl: "",
+              enableBannerDisplay: true
+            }
           },
           content: {}
         };
@@ -65,9 +75,27 @@
                 DesignHome.data.design = {};
               if (!DesignHome.data.design.itemDetailsLayout)
                 DesignHome.data.design.itemDetailsLayout = DesignHome.layouts.itemDetailsLayout[0].name;
+              if (!DesignHome.data.design.bottomLogo) {
+                DesignHome.data.design.bottomLogo = {
+                  displayMode: "logo",
+                  logoImage: "",
+                  logoUrl: "",
+                  logoSize: "small",
+                  showCollaborationText: false,
+                  bannerImage: "",
+                  bannerUrl: "",
+                  enableBannerDisplay: true
+                };
+              }
               DesignHomeMaster = angular.copy(data.data);
               if (DesignHome.data.design.itemDetailsBgImage) {
                 background.loadbackground(DesignHome.data.design.itemDetailsBgImage);
+              }
+              if (DesignHome.data.design.bottomLogo.logoImage) {
+                logoImage.loadbackground(DesignHome.data.design.bottomLogo.logoImage);
+              }
+              if (DesignHome.data.design.bottomLogo.bannerImage) {
+                bannerImage.loadbackground(DesignHome.data.design.bottomLogo.bannerImage);
               }
               $scope.$digest();
             }
@@ -93,6 +121,94 @@
           if (!$scope.$$phase && !$scope.$root.$$phase) {
             $scope.$apply();
           }
+        };
+
+        var logoImage = new Buildfire.components.images.thumbnail("#logoImage");
+
+        logoImage.onChange = function (url) {
+          DesignHome.data.design.bottomLogo.logoImage = url;
+          if (!$scope.$$phase && !$scope.$root.$$phase) {
+            $scope.$apply();
+          }
+        };
+
+        logoImage.onDelete = function (url) {
+          DesignHome.data.design.bottomLogo.logoImage = "";
+          if (!$scope.$$phase && !$scope.$root.$$phase) {
+            $scope.$apply();
+          }
+        };
+
+        var bannerImage = new Buildfire.components.images.thumbnail("#bannerImage");
+
+        bannerImage.onChange = function (url) {
+          DesignHome.data.design.bottomLogo.bannerImage = url;
+          if (!$scope.$$phase && !$scope.$root.$$phase) {
+            $scope.$apply();
+          }
+        };
+
+        bannerImage.onDelete = function (url) {
+          DesignHome.data.design.bottomLogo.bannerImage = "";
+          if (!$scope.$$phase && !$scope.$root.$$phase) {
+            $scope.$apply();
+          }
+        };
+
+        DesignHome.onDisplayModeChange = function () {
+          if (!$scope.$$phase && !$scope.$root.$$phase) {
+            $scope.$apply();
+          }
+        };
+
+        DesignHome.saveBottomLogoConfig = function () {
+          saveData(function (err, data) {
+            if (err) {
+              console.error('Error saving bottom logo config:', err);
+              Buildfire.dialog.alert({
+                title: 'Error',
+                message: 'Failed to save bottom logo configuration'
+              });
+            } else {
+              Buildfire.dialog.alert({
+                title: 'Success',
+                message: 'Bottom logo configuration saved successfully'
+              });
+              DesignHomeMaster = angular.copy(DesignHome.data);
+            }
+          });
+        };
+
+        DesignHome.removeBottomLogoConfig = function () {
+          Buildfire.dialog.confirm({
+            title: 'Remove Configuration',
+            message: 'Are you sure you want to remove the bottom logo configuration?'
+          }, function (result) {
+            if (result) {
+              DesignHome.data.design.bottomLogo = {
+                displayMode: "logo",
+                logoImage: "",
+                logoUrl: "",
+                logoSize: "small",
+                showCollaborationText: false,
+                bannerImage: "",
+                bannerUrl: "",
+                enableBannerDisplay: true
+              };
+              logoImage.clear();
+              bannerImage.clear();
+              saveData(function (err, data) {
+                if (err) {
+                  console.error('Error removing bottom logo config:', err);
+                } else {
+                  DesignHomeMaster = angular.copy(DesignHome.data);
+                  if (!$scope.$$phase && !$scope.$root.$$phase) {
+                    $scope.$apply();
+                  }
+                }
+              });
+            }
+          });
         };
 
         init();
